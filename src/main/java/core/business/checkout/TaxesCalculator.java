@@ -1,15 +1,18 @@
 package core.business.checkout;
 
+import core.models.BuyOrder;
 import core.models.Product;
 import core.models.TaxedProduct;
 import core.models.enums.ProductType;
 import utils.MathUtils;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.math.RoundingMode;
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static utils.MathUtils.bigDecimal;
 
@@ -24,48 +27,57 @@ public class TaxesCalculator {
     private static List<ProductType> EXEMPT_TYPES = Arrays.asList(ProductType.BOOK, ProductType.MEDICINE, ProductType.FOOD);
 
     /**
-     * Gets the taxed products from a list of Products.
+     * Gets the taxed products from buy order list.
      *
-     * @param products {@link List<Product>} the List of Products
-     * @return the taxed products
+     * @param basket {@link List<Product>} the List of Products
+     * @return the map of taxed products and quantity
      */
-    public List<TaxedProduct> getTaxedProducts(List<Product> products) {
-        List<TaxedProduct> taxedProducts = new ArrayList<>();
-        for (Product product : products) {
+    public HashMap<TaxedProduct, BigInteger> getTaxedProducts(List<BuyOrder> basket) {
+        HashMap<TaxedProduct, BigInteger> taxedBasket = new HashMap<>();
+        for (BuyOrder buyOrder : basket) {
+            Product product = buyOrder.getProduct();
+            BigInteger quantity = buyOrder.getQuantity();
             BigDecimal goods = this.calculateProductImportTax(product);
             BigDecimal imports = this.calculateProductGoodsTax(product);
             BigDecimal taxedPrice = product.getPrice().add(goods).add(imports);
             TaxedProduct taxedProduct = new TaxedProduct(product, taxedPrice, goods, imports);
-            taxedProducts.add(taxedProduct);
+            taxedBasket.put(taxedProduct, quantity);
         }
-        return taxedProducts;
+        return taxedBasket;
     }
 
     /**
-     * Gets total taxes from a list of taxed products.
+     * Gets total taxes from a taxed basket
      *
-     * @param taxedProducts {@link List<TaxedProduct>} the taxed products
+     * @param taxedBasket {@link List<TaxedProduct>} the taxed products
      * @return the total taxes
      */
-    public BigDecimal getTotalTaxes(List<TaxedProduct> taxedProducts) {
+    public BigDecimal getTotalTaxes(HashMap<TaxedProduct, BigInteger> taxedBasket) {
         BigDecimal totalTaxes = bigDecimal("0.00");
-        for (Product product : taxedProducts) {
-            BigDecimal productTotalTax = this.getTotalTaxesFromProduct(product);
-            totalTaxes = totalTaxes.add(productTotalTax);
+
+        for (Map.Entry<TaxedProduct, BigInteger> entry : taxedBasket.entrySet()) {
+            TaxedProduct product = entry.getKey();
+            BigInteger quantity = entry.getValue();
+            BigDecimal totalProductTaxes = this.getTotalTaxesFromProduct(product).multiply(bigDecimal(quantity));
+            totalTaxes = totalTaxes.add(totalProductTaxes);
         }
         return totalTaxes;
     }
 
     /**
-     * Gets total price with taxes from a list of taxed Products.
+     * Gets total price with taxes from a taxed basket.
      *
-     * @param taxedProducts {@link List<TaxedProduct>} the taxed products
+     * @param taxedBasket {@link List<TaxedProduct>} the taxed products
      * @return the total price with taxes
      */
-    public BigDecimal getTotalPriceWithTaxes(List<TaxedProduct> taxedProducts) {
+    public BigDecimal getTotalPriceWithTaxes(HashMap<TaxedProduct, BigInteger> taxedBasket) {
         BigDecimal taxedTotalPrice = bigDecimal("0.00");
-        for (TaxedProduct taxedProduct : taxedProducts) {
-            taxedTotalPrice = taxedTotalPrice.add(taxedProduct.getTaxedPrice());
+
+        for (Map.Entry<TaxedProduct, BigInteger> entry : taxedBasket.entrySet()) {
+            TaxedProduct product = entry.getKey();
+            BigInteger quantity = entry.getValue();
+            BigDecimal totalProductValue = product.getTaxedPrice().multiply(bigDecimal(quantity));
+            taxedTotalPrice = taxedTotalPrice.add(totalProductValue);
         }
         return taxedTotalPrice;
     }
