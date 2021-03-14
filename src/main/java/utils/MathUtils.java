@@ -1,6 +1,7 @@
 package utils;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.math.RoundingMode;
 
 public class MathUtils {
@@ -24,7 +25,7 @@ public class MathUtils {
     }
 
     /**
-     * Creates a {@link BigDecimal} instance
+     * Creates a {@link BigDecimal} instance from {@link String}
      *
      * @param input the String value to be initialized as big decimal
      * @return the new big decimal instance
@@ -32,4 +33,15 @@ public class MathUtils {
     public static BigDecimal bigDecimal(String input) throws IllegalArgumentException {
         return new BigDecimal(input);
     }
+
+    /**
+     * Creates {@link BigDecimal} instance from {@link BigInteger}
+     *
+     * @param input the BigInteger to be converted
+     * @return the new big decimal instance
+     */
+    public static BigDecimal bigDecimal(BigInteger input) throws IllegalArgumentException {
+        return new BigDecimal(input);
+    }
+
 }
