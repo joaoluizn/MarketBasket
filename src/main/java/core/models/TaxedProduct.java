@@ -23,15 +23,8 @@ public class TaxedProduct extends Product {
         return goodTax;
     }
 
-    public void setGoodTax(BigDecimal goodTax) {
-        this.goodTax = goodTax;
-    }
-
     public BigDecimal getImportTax() {
         return importTax;
     }
 
-    public void setImportTax(BigDecimal importTax) {
-        this.importTax = importTax;
-    }
 }

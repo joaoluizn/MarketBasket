@@ -2,17 +2,17 @@ package core.models;
 
 import java.math.BigInteger;
 
-public class BuyOrder {
+public class TaxedOrder {
 
-    Product product;
-    BigInteger quantity;
+    private TaxedProduct product;
+    private BigInteger quantity;
 
-    public BuyOrder(Product product, BigInteger quantity) {
+    public TaxedOrder(TaxedProduct product, BigInteger quantity) {
         this.product = product;
         this.quantity = quantity;
     }
 
-    public Product getProduct() {
+    public TaxedProduct getProduct() {
         return product;
     }
 
