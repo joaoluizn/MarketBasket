@@ -2,14 +2,16 @@ package core.models;
 
 import core.models.enums.ProductType;
 
+import java.math.BigDecimal;
+
 public class Product {
 
     private String name;
-    private double price;
+    private BigDecimal price;
     private ProductType type;
     private boolean isImported;
 
-    public Product(String name, double price, boolean isImported, ProductType type) {
+    public Product(String name, BigDecimal price, boolean isImported, ProductType type) {
         this.name = name;
         this.price = price;
         this.isImported = isImported;
@@ -24,11 +26,11 @@ public class Product {
         this.name = name;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
