@@ -19,7 +19,6 @@ public class TaxedProduct extends Product {
         return taxedPrice;
     }
 
-
     public BigDecimal getGoodTax() {
         return goodTax;
     }

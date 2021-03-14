@@ -82,7 +82,6 @@ public class TaxesCalculator {
         return goodTax.add(importTax);
     }
 
-
     /**
      * Gets product importation tax from a single product.
      *

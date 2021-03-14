@@ -8,10 +8,10 @@ public class MathUtils {
     /**
      * Rounds a {@link BigDecimal} value based on a rounding mode and increment
      *
-     * @param value the {@link BigDecimal} to be rounded
-     * @param increment the {@link BigDecimal} increment factor
+     * @param value the big decimal to be rounded
+     * @param increment the big decimal increment factor
      * @param roundingMode the desired round mode
-     * @return the rounded {@link BigDecimal}
+     * @return the rounded big decimal
      */
     public static BigDecimal round(BigDecimal value, BigDecimal increment, RoundingMode roundingMode) {
         // Prevents division by 0.
@@ -26,8 +26,8 @@ public class MathUtils {
     /**
      * Creates a {@link BigDecimal} instance
      *
-     * @param input the {@link String} value to be initialized as big decimal
-     * @return the new {@link BigDecimal} instance
+     * @param input the String value to be initialized as big decimal
+     * @return the new big decimal instance
      */
     public static BigDecimal bigDecimal(String input) throws IllegalArgumentException {
         return new BigDecimal(input);
