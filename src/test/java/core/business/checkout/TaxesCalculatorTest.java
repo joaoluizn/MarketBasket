@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static utils.MathUtils.decimal;
+import static utils.MathUtils.bigDecimal;
 
 public class TaxesCalculatorTest {
 
@@ -26,7 +26,7 @@ public class TaxesCalculatorTest {
         List<Product> basket = this.getFirstBasketInput();
         List<TaxedProduct> taxedProducts = this.taxesCalculator.getTaxedProducts(basket);
         BigDecimal taxedTotalPrice = this.taxesCalculator.getTotalPriceWithTaxes(taxedProducts);
-        Assertions.assertEquals(decimal("29.83"), taxedTotalPrice);
+        Assertions.assertEquals(bigDecimal("29.83"), taxedTotalPrice);
     }
 
     @Test
@@ -34,7 +34,7 @@ public class TaxesCalculatorTest {
         List<Product> basket = this.getSecondBasketInput();
         List<TaxedProduct> taxedProducts = this.taxesCalculator.getTaxedProducts(basket);
         BigDecimal taxedTotalPrice = this.taxesCalculator.getTotalPriceWithTaxes(taxedProducts);
-        Assertions.assertEquals(decimal("65.15"), taxedTotalPrice);
+        Assertions.assertEquals(bigDecimal("65.15"), taxedTotalPrice);
     }
 
     @Test
@@ -42,7 +42,7 @@ public class TaxesCalculatorTest {
         List<Product> basket = this.getThirdBasketInput();
         List<TaxedProduct> taxedProducts = this.taxesCalculator.getTaxedProducts(basket);
         BigDecimal taxedTotalPrice = this.taxesCalculator.getTotalPriceWithTaxes(taxedProducts);
-        Assertions.assertEquals(decimal("74.68"), taxedTotalPrice);
+        Assertions.assertEquals(bigDecimal("74.68"), taxedTotalPrice);
     }
 
     @Test
@@ -50,7 +50,7 @@ public class TaxesCalculatorTest {
         List<Product> basket = this.getFirstBasketInput();
         List<TaxedProduct> taxedProducts = this.taxesCalculator.getTaxedProducts(basket);
         BigDecimal taxes = this.taxesCalculator.getTotalTaxes(taxedProducts);
-        Assertions.assertEquals(decimal("1.50"), taxes);
+        Assertions.assertEquals(bigDecimal("1.50"), taxes);
     }
 
     @Test
@@ -58,7 +58,7 @@ public class TaxesCalculatorTest {
         List<Product> basket = this.getSecondBasketInput();
         List<TaxedProduct> taxedProducts = this.taxesCalculator.getTaxedProducts(basket);
         BigDecimal taxes = this.taxesCalculator.getTotalTaxes(taxedProducts);
-        Assertions.assertEquals(decimal("7.65"), taxes);
+        Assertions.assertEquals(bigDecimal("7.65"), taxes);
     }
 
     @Test
@@ -66,29 +66,29 @@ public class TaxesCalculatorTest {
         List<Product> basket = this.getThirdBasketInput();
         List<TaxedProduct> taxedProducts = this.taxesCalculator.getTaxedProducts(basket);
         BigDecimal taxes = this.taxesCalculator.getTotalTaxes(taxedProducts);
-        Assertions.assertEquals(decimal("6.70"), taxes);
+        Assertions.assertEquals(bigDecimal("6.70"), taxes);
     }
 
     private List<Product> getFirstBasketInput() {
-        Product product1 = new Product("Chocolate Bar", decimal("0.85"), false, ProductType.FOOD);
-        Product product2 = new Product("Book", decimal("12.49"), false, ProductType.BOOK);
-        Product product3 = new Product("music CD", decimal("14.99"), false, ProductType.OTHER);
+        Product product1 = new Product("Chocolate Bar", bigDecimal("0.85"), false, ProductType.FOOD);
+        Product product2 = new Product("Book", bigDecimal("12.49"), false, ProductType.BOOK);
+        Product product3 = new Product("music CD", bigDecimal("14.99"), false, ProductType.OTHER);
         List<Product> products = Arrays.asList(product1, product2, product3);
         return new ArrayList<>(products);
     }
 
     private List<Product> getSecondBasketInput() {
-        Product product1 = new Product("Chocolate Box", decimal("10.00"), true, ProductType.FOOD);
-        Product product2 = new Product("Perfume", decimal("47.50"), true, ProductType.OTHER);
+        Product product1 = new Product("Chocolate Box", bigDecimal("10.00"), true, ProductType.FOOD);
+        Product product2 = new Product("Perfume", bigDecimal("47.50"), true, ProductType.OTHER);
         List<Product> products = Arrays.asList(product1, product2);
         return new ArrayList<>(products);
     }
 
     private List<Product> getThirdBasketInput() {
-        Product product1 = new Product("perfume", decimal("27.99"), true, ProductType.OTHER);
-        Product product2 = new Product("perfume", decimal("18.99"), false, ProductType.OTHER);
-        Product product3 = new Product("headache pills", decimal("9.75"), false, ProductType.MEDICINE);
-        Product product4 = new Product("Chocolate Box", decimal("11.25"), true, ProductType.FOOD);
+        Product product1 = new Product("perfume", bigDecimal("27.99"), true, ProductType.OTHER);
+        Product product2 = new Product("perfume", bigDecimal("18.99"), false, ProductType.OTHER);
+        Product product3 = new Product("headache pills", bigDecimal("9.75"), false, ProductType.MEDICINE);
+        Product product4 = new Product("Chocolate Box", bigDecimal("11.25"), true, ProductType.FOOD);
         List<Product> products = Arrays.asList(product1, product2, product3, product4);
         return new ArrayList<>(products);
     }

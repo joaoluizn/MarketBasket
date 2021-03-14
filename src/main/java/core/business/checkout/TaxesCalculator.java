@@ -11,27 +11,27 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static utils.MathUtils.decimal;
+import static utils.MathUtils.bigDecimal;
 
 /**
  * Tax Calculator Component.
  */
 public class TaxesCalculator {
 
-    private static final BigDecimal ROUNDUP_FACTOR = decimal("0.05");
-    private static final BigDecimal IMPORTATION_FACTOR = decimal("0.05");
-    private static final BigDecimal TRADE_GOODS_FACTOR = decimal("0.1");
+    private static final BigDecimal ROUNDUP_FACTOR = bigDecimal("0.05");
+    private static final BigDecimal IMPORTATION_FACTOR = bigDecimal("0.05");
+    private static final BigDecimal TRADE_GOODS_FACTOR = bigDecimal("0.1");
     private static List<ProductType> EXEMPT_TYPES = Arrays.asList(ProductType.BOOK, ProductType.MEDICINE, ProductType.FOOD);
 
     /**
-     * Gets taxed products.
+     * Gets the taxed products from a list of Products.
      *
-     * @param basket the List of Products
+     * @param products {@link List<Product>} the List of Products
      * @return the taxed products
      */
-    public List<TaxedProduct> getTaxedProducts(List<Product> basket) {
+    public List<TaxedProduct> getTaxedProducts(List<Product> products) {
         List<TaxedProduct> taxedProducts = new ArrayList<>();
-        for (Product product : basket) {
+        for (Product product : products) {
             BigDecimal goods = this.calculateProductImportTax(product);
             BigDecimal imports = this.calculateProductGoodsTax(product);
             BigDecimal taxedPrice = product.getPrice().add(goods).add(imports);
@@ -42,14 +42,14 @@ public class TaxesCalculator {
     }
 
     /**
-     * Gets total taxes.
+     * Gets total taxes from a list of taxed products.
      *
-     * @param taxedBasket the taxed basket
+     * @param taxedProducts {@link List<TaxedProduct>} the taxed products
      * @return the total taxes
      */
-    public BigDecimal getTotalTaxes(List<TaxedProduct> taxedBasket) {
-        BigDecimal totalTaxes = decimal("0.00");
-        for (Product product : taxedBasket) {
+    public BigDecimal getTotalTaxes(List<TaxedProduct> taxedProducts) {
+        BigDecimal totalTaxes = bigDecimal("0.00");
+        for (Product product : taxedProducts) {
             BigDecimal productTotalTax = this.getTotalTaxesFromProduct(product);
             totalTaxes = totalTaxes.add(productTotalTax);
         }
@@ -57,14 +57,14 @@ public class TaxesCalculator {
     }
 
     /**
-     * Gets total price with taxes.
+     * Gets total price with taxes from a list of taxed Products.
      *
-     * @param taxedBasket the taxed basket
+     * @param taxedProducts {@link List<TaxedProduct>} the taxed products
      * @return the total price with taxes
      */
-    public BigDecimal getTotalPriceWithTaxes(List<TaxedProduct> taxedBasket) {
-        BigDecimal taxedTotalPrice = decimal("0.00");
-        for (TaxedProduct taxedProduct : taxedBasket) {
+    public BigDecimal getTotalPriceWithTaxes(List<TaxedProduct> taxedProducts) {
+        BigDecimal taxedTotalPrice = bigDecimal("0.00");
+        for (TaxedProduct taxedProduct : taxedProducts) {
             taxedTotalPrice = taxedTotalPrice.add(taxedProduct.getTaxedPrice());
         }
         return taxedTotalPrice;
@@ -73,7 +73,7 @@ public class TaxesCalculator {
     /**
      * Gets total taxes for a single product
      *
-     * @param product the product
+     * @param product the {@link Product}
      * @return the product total taxes
      */
     private BigDecimal getTotalTaxesFromProduct(Product product) {
@@ -86,7 +86,7 @@ public class TaxesCalculator {
     /**
      * Gets product importation tax from a single product.
      *
-     * @param product the product
+     * @param product the {@link Product}
      * @return the product importation tax
      */
     private BigDecimal calculateProductImportTax(Product product) {
@@ -101,7 +101,7 @@ public class TaxesCalculator {
     /**
      * Gets product good tax from a single product.
      *
-     * @param product the product
+     * @param product the {@link Product}
      * @return the product goods tax
      */
     private BigDecimal calculateProductGoodsTax(Product product) {
