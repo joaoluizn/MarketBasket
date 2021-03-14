@@ -29,12 +29,12 @@ public class TaxesCalculator {
     /**
      * Gets the taxed products from buy order list.
      *
-     * @param basket {@link List<Product>} the List of Products
+     * @param buyOrders the List of BuyOrder
      * @return the map of taxed products and quantity
      */
-    public HashMap<TaxedProduct, BigInteger> getTaxedProducts(List<BuyOrder> basket) {
+    public HashMap<TaxedProduct, BigInteger> getTaxedProducts(List<BuyOrder> buyOrders) {
         HashMap<TaxedProduct, BigInteger> taxedBasket = new HashMap<>();
-        for (BuyOrder buyOrder : basket) {
+        for (BuyOrder buyOrder : buyOrders) {
             Product product = buyOrder.getProduct();
             BigInteger quantity = buyOrder.getQuantity();
             BigDecimal goods = this.calculateProductImportTax(product);
@@ -49,7 +49,7 @@ public class TaxesCalculator {
     /**
      * Gets total taxes from a taxed basket
      *
-     * @param taxedBasket {@link List<TaxedProduct>} the taxed products
+     * @param taxedBasket The taxed basket containing Taxed Products and quantity
      * @return the total taxes
      */
     public BigDecimal getTotalTaxes(HashMap<TaxedProduct, BigInteger> taxedBasket) {
@@ -67,7 +67,7 @@ public class TaxesCalculator {
     /**
      * Gets total price with taxes from a taxed basket.
      *
-     * @param taxedBasket {@link List<TaxedProduct>} the taxed products
+     * @param taxedBasket The taxed basket containing Taxed Products and quantity
      * @return the total price with taxes
      */
     public BigDecimal getTotalPriceWithTaxes(HashMap<TaxedProduct, BigInteger> taxedBasket) {
