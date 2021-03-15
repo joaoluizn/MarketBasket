@@ -4,7 +4,7 @@ A Java Market Basket Implementation with Taxes calculation.
 ## Architecture
 The following Architecture was thinking on acess logic through Business layer, were the ```Checkout.java``` is the Business Object, that acess components needed in order to achieve the Checkout.
 
-These data would be passed to a superior layer that could be a Controller, or in that case, the Application.java itself.
+These data would be passed to a superior layer that could be a Controller, or in that case, the ```Application.java``` itself.
 
 Models contain entities that could be schema for database objects.
 
@@ -49,4 +49,9 @@ Tests folder follows the same architecture to unit test business logic.
  ```
 
  ## How to Run
- Run the Application.java main method.
+ - Run the ```Application.java``` main method.
+
+## How to Test
+- Run the following command on terminal:
+```./gradlew test```
+- Or run through the IDE
