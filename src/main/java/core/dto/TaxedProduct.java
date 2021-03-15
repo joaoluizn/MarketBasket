@@ -1,4 +1,6 @@
-package core.models;
+package core.dto;
+
+import core.models.Product;
 
 import java.math.BigDecimal;
 

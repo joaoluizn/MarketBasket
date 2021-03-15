@@ -1,8 +1,8 @@
 package core.business;
 
 import TestUtils.TestUtils;
-import core.models.BuyOrder;
-import core.models.Receipt;
+import core.dto.BuyOrder;
+import core.dto.Receipt;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

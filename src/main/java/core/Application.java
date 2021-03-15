@@ -1,9 +1,9 @@
 package core;
 
 import core.business.Checkout;
-import core.models.BuyOrder;
+import core.dto.BuyOrder;
 import core.models.Product;
-import core.models.Receipt;
+import core.dto.Receipt;
 import core.models.enums.ProductType;
 
 import java.math.BigInteger;

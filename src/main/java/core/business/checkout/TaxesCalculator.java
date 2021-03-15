@@ -1,9 +1,9 @@
 package core.business.checkout;
 
-import core.models.BuyOrder;
+import core.dto.BuyOrder;
 import core.models.Product;
-import core.models.TaxedOrder;
-import core.models.TaxedProduct;
+import core.dto.TaxedOrder;
+import core.dto.TaxedProduct;
 import core.models.enums.ProductType;
 import utils.MathUtils;
 

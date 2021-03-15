@@ -1,6 +1,6 @@
 package TestUtils;
 
-import core.models.BuyOrder;
+import core.dto.BuyOrder;
 import core.models.Product;
 import core.models.enums.ProductType;
 

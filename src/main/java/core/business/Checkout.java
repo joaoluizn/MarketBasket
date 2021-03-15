@@ -1,9 +1,9 @@
 package core.business;
 
 import core.business.checkout.TaxesCalculator;
-import core.models.BuyOrder;
-import core.models.Receipt;
-import core.models.TaxedOrder;
+import core.dto.BuyOrder;
+import core.dto.Receipt;
+import core.dto.TaxedOrder;
 
 import java.math.BigDecimal;
 import java.util.List;

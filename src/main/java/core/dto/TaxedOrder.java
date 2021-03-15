@@ -1,4 +1,4 @@
-package core.models;
+package core.dto;
 
 import java.math.BigInteger;
 
